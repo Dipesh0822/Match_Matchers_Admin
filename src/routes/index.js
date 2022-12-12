@@ -5,6 +5,7 @@ import AuthenticationRoutes from "./AuthenticationRoutes";
 import ErrorRoutes from "./ErrorRoutes";
 import UsersRoutes from "./UsersRoutes";
 import PerksRoutes from "./PerksRoutes";
+import BoostsRoute from "./BoostsRoutes";
 
 // ==============================|| ROUTING RENDER ||============================== //
 
@@ -13,7 +14,7 @@ export default function ThemeRoutes() {
     localStorage.getItem("MATCH_MASTER") == "undefined" ||
       localStorage.getItem("MATCH_MASTER") == null
       ? [AuthenticationRoutes]
-      : [MainRoutes, ErrorRoutes, UsersRoutes, PerksRoutes]
+      : [MainRoutes, ErrorRoutes, UsersRoutes, PerksRoutes, BoostsRoute]
   );
   // return useRoutes([
   //     AuthenticationRoutes,

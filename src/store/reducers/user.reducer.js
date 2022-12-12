@@ -11,6 +11,7 @@ const userReducer = createSlice({
       "/perk/perkList",
       "/dashboard",
       "/password",
+      "/boosts/boostsList",
     ],
   },
 });

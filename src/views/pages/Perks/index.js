@@ -7,12 +7,14 @@ import {
   Tooltip,
   IconButton,
   Typography,
+  Grid,
 } from "@mui/material";
 import {
   IconCirclePlus as AddIcon,
   IconPencil as UpdateIcon,
 } from "@tabler/icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Modal from "components/Modal";
 import moment from "moment";
 
 // Components
@@ -21,17 +23,16 @@ import DataTable from "components/DataTable";
 
 // import handlePermissions from "functions/handlePermissions";
 import MainCard from "ui-component/cards/MainCard";
+import CreatePerk from "./Components/CreatePerk";
+import PerkCard from "./Components/PerkCard";
 
 function Perks() {
   const theme = useTheme();
-  const constants = useSelector((state) => state.constants);
 
   const isMobileDevice = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [openModal, setOpenModal] = useState(false);
 
-  const [pageLmit, setpageLmit] = useState(10);
-  const [pageNo, setPageNo] = useState(0);
   //   const [menuPermissions, setMenuPermissions] = useState([]);
   //   const [agentPermissions, setAgentPermissions] = useState([]);
 
@@ -44,130 +45,52 @@ function Perks() {
     // setAgentPermissions(agentPermissions);
   }, []);
 
-  function handleUpdateModal(idx) {
-    // setConstantsIdx(idx);
-    // setUpdateModal(!updateModal);
-  }
-
-  const columns = [
-    {
-      name: "dataindex",
-      label: "SR NO",
-      options: {
-        filter: false,
-        sort: true,
-        customBodyRenderLite: (dataIndex) => {
-          const val = dataIndex + 1 + pageLmit * pageNo;
-          return val;
-        },
-      },
-    },
-    {
-      name: "NAME",
-      label: "NAME",
-      options: {
-        filter: true,
-        sort: true,
-        customBodyRender: (value) => <Typography>{value}</Typography>,
-      },
-    },
-    {
-      name: "VALUE",
-      label: "VALUES",
-      options: {
-        filter: false,
-        sort: true,
-        customBodyRender: (value) => <Typography>{value}</Typography>,
-      },
-    },
-    {
-      name: "UPDATE_DATE",
-      label: "LAST UPDATED",
-      options: {
-        filter: false,
-        sort: true,
-        customBodyRender: (value) => (
-          <Typography>{moment(value).format("DD/MM/YYYY HH:MM A")}</Typography>
-        ),
-      },
-    },
-    {
-      name: "action",
-      label: "Actions",
-      options: {
-        filter: false,
-        sort: false,
-        customBodyRenderLite: (dataIndex) => (
-          <>
-            {/* {menuPermissions.ISUPDATE ? ( */}
-            <Tooltip title="Update">
-              <IconButton
-                color="primary"
-                onClick={() => {
-                  //   dispatch(setDataIndex(dataIndex));
-                  handleUpdateModal(dataIndex);
-                }}
-              >
-                <UpdateIcon />
-              </IconButton>
-            </Tooltip>
-            {/* ) : null} */}
-          </>
-        ),
-      },
-    },
-  ];
-
-  //   const options = {
-  //     filter: true,
-  //     print: false,
-  //     download: false,
-  //     search: false,
-  //     selectableRows: false,
-  //     rowsPerPage: pageLmit,
-  //     pagination: true,
-  //     rowsPerPageOptions: [10, 20, 30],
-  //     serverSide: true,
-  //     count: constants.totalRecords,
-  //     sortThirdClickReset: true,
-  //     jumpToPage: true,
-  //     onChangeRowsPerPage: (page) => {
-  //       setpageLmit(page);
-  //     },
-  //     onChangePage: (page) => {
-  //       setPageNo(page);
-  //     },
-  //   };
+  const dispatch = useDispatch();
 
   return (
-    <>
-      <Box>
-        <MainCard
-          title={!isMobileDevice && "Perks List"}
-          secondary={
-            <Button
-              startIcon={<AddIcon />}
-              onClick={() => setOpenModal(!openModal)}
-              variant="contained"
-              color="secondary"
-            >
-              Add Perk
-            </Button>
-          }
-        >
-          <Box>
-            <DataTable
-              title="Keywords List"
-              data={[]}
-              columns={columns}
-              //   options={options}
-            />
-
-            {/* <NotFoundCard msg="Sorry, No data found" /> */}
-          </Box>
-        </MainCard>
-      </Box>
-    </>
+    <Box>
+      <MainCard
+        title={!isMobileDevice && "Perks List"}
+        secondary={
+          <Button
+            startIcon={<AddIcon />}
+            onClick={() => setOpenModal(!openModal)}
+            variant="contained"
+            color="secondary"
+          >
+            Add Perk
+          </Button>
+        }
+      >
+        <Box>
+          <Grid container spacing={4}>
+            <Grid item lg={3} md={3} sm={6} xs={12}>
+              <PerkCard
+              // data={pack_info}
+              // dataIndex={index}
+              // handleEdit={handleUpdateModal}
+              // handleDelete={handleDeleteDialog}
+              // ISDELETE={menuPermissions.ISDELETE}
+              // ISUPDATE={menuPermissions.ISUPDATE}
+              />
+            </Grid>
+          </Grid>
+        </Box>
+      </MainCard>
+      <Modal
+        title="Add New Perk"
+        open={openModal}
+        onClose={() => setOpenModal(!openModal)}
+      >
+        <CreatePerk
+          dispatch={dispatch}
+          isMobileDevice={isMobileDevice}
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          theme={theme}
+        />
+      </Modal>
+    </Box>
   );
 }
 

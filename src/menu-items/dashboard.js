@@ -44,6 +44,14 @@ const dashboard = {
       breadcrumbs: false,
       icon: icons.ConfigIcon,
     },
+    {
+      id: "boosts",
+      title: "Boosts",
+      type: "item",
+      url: "/boosts/boostsList",
+      breadcrumbs: false,
+      icon: icons.ConfigIcon,
+    },
   ],
 };
 
