@@ -25,6 +25,8 @@ import DataTable from "components/DataTable";
 import MainCard from "ui-component/cards/MainCard";
 import CreatePerk from "./Components/CreatePerk";
 import PerkCard from "./Components/PerkCard";
+import AlertComponent from "components/Alert";
+import DeleteConfirmation from "./Dialog/DeleteConfirmation";
 
 function Perks() {
   const theme = useTheme();
@@ -46,6 +48,12 @@ function Perks() {
   }, []);
 
   const dispatch = useDispatch();
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleDeleteDialog = () => {
+    console.log("=======");
+    setOpenDialog(!openDialog);
+  };
 
   return (
     <Box>
@@ -66,16 +74,26 @@ function Perks() {
           <Grid container spacing={4}>
             <Grid item lg={3} md={3} sm={6} xs={12}>
               <PerkCard
-              // data={pack_info}
-              // dataIndex={index}
-              // handleEdit={handleUpdateModal}
-              // handleDelete={handleDeleteDialog}
-              // ISDELETE={menuPermissions.ISDELETE}
-              // ISUPDATE={menuPermissions.ISUPDATE}
+                // data={pack_info}
+                // dataIndex={index}
+                // handleEdit={handleUpdateModal}
+                handleDelete={handleDeleteDialog}
+                // ISDELETE={menuPermissions.ISDELETE}
+                // ISUPDATE={menuPermissions.ISUPDATE}
               />
             </Grid>
           </Grid>
         </Box>
+        <Box>
+          <DeleteConfirmation
+            // coinPack={coinPack}
+            dispatch={dispatch}
+            openDialog={openDialog}
+            setOpenDialog={setOpenDialog}
+            // coinPackId={coinPackId}
+          />
+        </Box>
+        {/* <AlertComponent status={"true"} message="Sorry, no data" /> */}
       </MainCard>
       <Modal
         title="Add New Perk"

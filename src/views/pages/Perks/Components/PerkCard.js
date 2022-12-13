@@ -60,7 +60,12 @@ const PerkCard = ({ isLoading, handleEdit, data, dataIndex, handleDelete }) => {
                 <EditIcon />
               </IconButton>
 
-              <IconButton onClick={() => handleDelete(data.PACK_ID)}>
+              <IconButton
+                onClick={() =>
+                  handleDelete()
+                  // data.PACK_ID
+                }
+              >
                 <DeleteIcon color="red" />
               </IconButton>
             </Box>
