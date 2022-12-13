@@ -12,7 +12,8 @@ import {
   IconRefresh as ResetIcon,
   IconX as CancelIcon,
 } from "@tabler/icons";
-import userSchema from "schema/Users.schema";
+import Dropzone from "react-dropzone";
+import boosterSchema from "schema/Booster.schema";
 import { createUser } from "store/thunk/user.thunk";
 
 function CreateBoosts({
@@ -25,10 +26,10 @@ function CreateBoosts({
   const formik = useFormik({
     initialValues: {
       name: "",
-      age: "",
-      mobile_number: "",
+      file: "",
+      coin: "",
     },
-    validationSchema: userSchema,
+    validationSchema: boosterSchema,
     onSubmit: (values) => {
       dispatch(createUser(values));
       setOpenModal(!openModal);
@@ -68,47 +69,51 @@ function CreateBoosts({
         </FormControl>
         <FormControl
           fullWidth
-          error={formik.touched.age && Boolean(formik.errors.age)}
+          error={formik.touched.file && Boolean(formik.errors.file)}
           style={{ marginBottom: 10 }}
         >
-          <InputLabel htmlFor="age">Age</InputLabel>
-          <OutlinedInput
-            value={formik.values.age}
-            type="number"
-            label="Age"
-            name="age"
-            id="age"
-            min="0"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            variant="outlined"
-          />
-          {formik.touched.age && formik.errors.age && (
-            <FormHelperText id="age-error">{formik.errors.age}</FormHelperText>
+          {/* <input
+            id="file"
+            name="file"
+            type="file"
+            onChange={(event) => {
+              formik.setFieldValue("file", event.currentTarget.files[0]);
+            }}
+          /> */}
+          <Dropzone onDrop={(acceptedFiles) => console.log(acceptedFiles)}>
+            {({ getRootProps, getInputProps }) => (
+              <section>
+                <div {...getRootProps()}>
+                  <input {...getInputProps()} name="file" />
+                  <p>Drag 'n' drop some files here, or click to select files</p>
+                </div>
+              </section>
+            )}
+          </Dropzone>
+          {formik.touched.file && formik.errors.file && (
+            <FormHelperText id="age-error">{formik.errors.file}</FormHelperText>
           )}
         </FormControl>
         <FormControl
           fullWidth
-          error={
-            formik.touched.mobile_number && Boolean(formik.errors.mobile_number)
-          }
+          error={formik.touched.coin && Boolean(formik.errors.coin)}
           style={{ marginBottom: 10 }}
         >
-          <InputLabel htmlFor="mobile_number">Phone number</InputLabel>
+          <InputLabel htmlFor="coin">Coin</InputLabel>
           <OutlinedInput
-            value={formik.values.mobile_number}
+            value={formik.values.coin}
             type="text"
-            label="Amount of Majestic mobile_number"
-            name="mobile_number"
-            id="mobile_number"
+            label="Coin"
+            name="coin"
+            id="coin"
             min="0"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             variant="outlined"
           />
-          {formik.touched.mobile_number && formik.errors.mobile_number && (
-            <FormHelperText id="mobile_number-error">
-              {formik.errors.mobile_number}
+          {formik.touched.coin && formik.errors.coin && (
+            <FormHelperText id="coin-error">
+              {formik.errors.coin}
             </FormHelperText>
           )}
         </FormControl>

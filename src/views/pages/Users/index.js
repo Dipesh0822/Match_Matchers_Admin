@@ -50,8 +50,8 @@ function UsersList() {
       },
     },
     {
-      name: "VALUE",
-      label: "VALUES",
+      name: "email",
+      label: "EMAIL",
       options: {
         filter: false,
         sort: true,
@@ -59,8 +59,8 @@ function UsersList() {
       },
     },
     {
-      name: "UPDATE_DATE",
-      label: "LAST UPDATED",
+      name: "coin",
+      label: "COIN",
       options: {
         filter: false,
         sort: true,
@@ -71,7 +71,7 @@ function UsersList() {
     },
     {
       name: "action",
-      label: "Actions",
+      label: "ACTIONS",
       options: {
         filter: false,
         sort: false,
@@ -97,21 +97,7 @@ function UsersList() {
   ];
   return (
     <Box>
-      <MainCard
-        title="Users"
-        secondary={
-          <Button
-            startIcon={<AddIcon />}
-            variant="contained"
-            color="primary"
-            sx={{ mx: 3 }}
-            onClick={() => setOpenModal(!openModal)}
-            id="add-Users"
-          >
-            Add User
-          </Button>
-        }
-      >
+      <MainCard title="Users">
         <Box>
           <DataTable
             title="Keywords List"
@@ -123,19 +109,6 @@ function UsersList() {
           {/* <NotFoundCard msg="Sorry, No data found" /> */}
         </Box>
       </MainCard>
-      <Modal
-        title="Add New User"
-        open={openModal}
-        onClose={() => setOpenModal(!openModal)}
-      >
-        <CreateUser
-          dispatch={dispatch}
-          isMobileDevice={isMobileDevice}
-          openModal={openModal}
-          setOpenModal={setOpenModal}
-          theme={theme}
-        />
-      </Modal>
     </Box>
   );
 }

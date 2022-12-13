@@ -2,12 +2,14 @@ import PropTypes from "prop-types";
 
 // material-ui
 import { styled, useTheme } from "@mui/material/styles";
-import { Box, Grid, Typography, IconButton } from "@mui/material";
+import { Box, Grid, Typography, IconButton, Avatar } from "@mui/material";
 import { IconPencil as EditIcon, IconTrash as DeleteIcon } from "@tabler/icons";
 
 // project imports
 import MainCard from "ui-component/cards/MainCard";
 import SkeletonEarningCard from "ui-component/cards/Skeleton/EarningCard";
+
+import Img from "assets/images/download.jpeg";
 
 const CardWrapper = styled(MainCard)(({ theme, data }) => ({
   overflow: "hidden",
@@ -61,8 +63,8 @@ const PerkCard = ({ isLoading, handleEdit, data, dataIndex, handleDelete }) => {
               </IconButton>
 
               <IconButton
-                onClick={() =>
-                  handleDelete()
+                onClick={
+                  () => handleDelete()
                   // data.PACK_ID
                 }
               >
@@ -75,28 +77,34 @@ const PerkCard = ({ isLoading, handleEdit, data, dataIndex, handleDelete }) => {
               <Grid item>
                 <Box
                   style={{
-                    border: "1px solid",
-                    borderRadius: 5,
-                    borderColor: theme.palette.warning.dark,
-                    textAlign: "center",
-                    marginBottom: 40,
-                    padding: 2,
+                    display: "flex",
+                    justifyContent: "center",
+                    width: "150px",
+                    margin: "auto",
                   }}
                 >
-                  <Typography
+                  <img
+                    alt="Remy Sharp"
+                    src={Img}
                     style={{
-                      fontSize: "3rem",
-                      fontWeight: 500,
+                      textAlign: "center",
+                      objectFit: "cover",
+                      borderRadius: "50%",
+                      border: "2px solid #ffd77c",
                     }}
-                    id="game-pack-title"
-                  >
-                    Aarya
-                  </Typography>
+                  />
+                  {/* <Avatar alt="Remy Sharp" src={Img} /> */}
                 </Box>
               </Grid>
               <Grid item>
-                <Box sx={{ display: "flex", alignItems: "center" }}>
-                  age:
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginTop: "15px",
+                  }}
+                >
                   <Typography
                     sx={{
                       fontSize: "1.5rem",
@@ -104,21 +112,7 @@ const PerkCard = ({ isLoading, handleEdit, data, dataIndex, handleDelete }) => {
                       ml: 2,
                     }}
                   >
-                    25
-                  </Typography>
-                </Box>
-              </Grid>
-              <Grid item direction="row">
-                <Box sx={{ display: "flex", alignItems: "center" }}>
-                  contact:
-                  <Typography
-                    sx={{
-                      fontSize: "1.5rem",
-                      fontWeight: 500,
-                      ml: 2,
-                    }}
-                  >
-                    9685741236
+                    Aarya
                   </Typography>
                 </Box>
               </Grid>
