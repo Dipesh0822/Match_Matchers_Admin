@@ -18,7 +18,7 @@ function BootsList() {
   return (
     <Box>
       <MainCard
-        title="Boosts"
+        title="Boosters"
         secondary={
           <Button
             startIcon={<AddIcon />}
@@ -26,9 +26,9 @@ function BootsList() {
             color="primary"
             sx={{ mx: 3 }}
             onClick={() => setOpenModal(!openModal)}
-            id="add-Boosts"
+            id="add-Boosters"
           >
-            Add Boosts
+            Add Booster
           </Button>
         }
       >
@@ -50,7 +50,7 @@ function BootsList() {
         </Box>
       </MainCard>
       <Modal
-        title="Add New Boosts"
+        title="Add New Booster"
         open={openModal}
         onClose={() => setOpenModal(!openModal)}
       >
